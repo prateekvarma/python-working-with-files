@@ -11,4 +11,12 @@ if current_day == 5:  # monday = 0
         all_quotes = f.readlines()  # a list of all quotes
         random_quote = random.choice(all_quotes)  # a random quote
 
-
+    # send an email with this random quote
+    with smtplib.SMTP("smtp.gmail,com") as connection:
+        connection.starttls()
+        connection.login("email@gmail.com", "password")
+        connection.sendmail(
+            from_addr="email@gmail.com",
+            to_addrs="email2@gmail.com",
+            msg=f"Subject: Monday Quote\n\n{random_quote}"
+        )
